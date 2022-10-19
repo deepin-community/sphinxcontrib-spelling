@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+export PYTHONWARNINGS=d
+export PYBUILD_NAME=sphinxcontrib.spelling
+# test_contributors is meant to run on the repository (it get contributors
+# using `git log` and test_builder.py need the package to be installed.
+export export PYBUILD_TEST_ARGS = -v -k 'not test_contributors' \
+	--ignore tests/test_builder.py
+export PYENCHANT_VERBOSE_FIND=1
+
+%:
+	dh $@ --with python3,sphinxdoc --buildsystem=pybuild
+
+override_dh_sphinxdoc:
+ifeq (,$(findstring nodocs, $(DEB_BUILD_OPTIONS)))
+	PYTHONPATH=. python3 -m sphinx -b html docs/source \
+		debian/python-sphinxcontrib.spelling-doc/usr/share/doc/python-sphinxcontrib.spelling-doc/html/
+	dh_sphinxdoc
+endif

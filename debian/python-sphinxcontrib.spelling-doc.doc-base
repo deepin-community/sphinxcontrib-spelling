@@ -1,0 +1,9 @@
+Document: python-sphinxcontrib.spelling-doc
+Title: sphinxcontrib.spelling Documentation
+Author: Doug Hellmann
+Abstract: A spelling checker for Sphinx-based documentation.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/python-sphinxcontrib.spelling-doc/html/index.html
+Files: /usr/share/doc/python-sphinxcontrib.spelling-doc/html/*

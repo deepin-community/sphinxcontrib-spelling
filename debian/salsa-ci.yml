@@ -1,0 +1,9 @@
+---
+include:
+  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/recipes/debian.yml
+
+variables:
+  # ctypes.util.find_library uses platform info to perform search. Since
+  # pyenchant uses ctypes to find libenchant, kernel variation will make tests
+  # fails.
+  SALSA_CI_REPROTEST_ARGS: --variations=-kernel

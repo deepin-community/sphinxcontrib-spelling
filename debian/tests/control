@@ -1,0 +1,10 @@
+Tests: unittests3
+Depends:
+ git,
+ hunspell-de-de,
+ hunspell-en-us,
+ python3-all,
+ python3-fixtures,
+ python3-pytest,
+ python3-sphinx,
+ @

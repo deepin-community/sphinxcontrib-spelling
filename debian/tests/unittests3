@@ -1,0 +1,14 @@
+#!/bin/sh
+set -efu
+
+export PYTHONWARNINGS=d
+
+python3_all="$(py3versions -s 2>/dev/null)"
+
+cp -r tests "$AUTOPKGTEST_TMP/"
+cd "$AUTOPKGTEST_TMP"
+
+for py in $python3_all; do
+    echo "=== $py ==="
+    $py -m pytest --verbose -k 'not test_contributors' 2>&1
+done

@@ -1,0 +1,246 @@
+sphinxcontrib-spelling (7.2.1-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Update Maintainer field with new Debian Python Team
+    contact address.
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+    + python-sphinxcontrib.spelling-doc: Add Multi-Arch: foreign.
+
+  [ Daniele Tricoli ]
+  * New upstream version 7.2.1.
+  * Swith to pytest for testing.
+  * Run wrap-and-sort -s.
+  * Remove upstream signing key since upstream doesn't sign the package
+    anymore.
+  * debian/control
+    - Bump Standards-Version to 4.6.0, no changes needed.
+    - Remove python3-six from Build-Depends.
+    - Bump debhelper compat version to 13.
+    - Remove the no more used python3-fixtures from Build-Depends.
+    - Add python3-importlib-metadata to Build-Depends and Depends.
+  * debian/copyright
+    - Update copyright years.
+  * debian/rules
+    - Ignore tests that need the package to be installed.
+    - Ignore test_contributors since it needs the git repository of the
+      project: it uses git log to take contributors.
+    - Export PYENCHANT_VERBOSE_FIND.
+  * debian/salsa-ci.yml
+    - Enable salsa pipelines.
+    - Disable reprotest variation kernel because it make tests fails during
+      second run.
+  * debian/tests/control
+    - Add git since it is used by a filter.
+  * debian/watch
+    - Fix URL and bump version to 4.
+
+ -- Daniele Tricoli <eriol@debian.org>  Wed, 01 Sep 2021 18:31:57 +0200
+
+sphinxcontrib-spelling (4.3.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Bump Standards-Version to 4.4.1.
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 11 to 12.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Daniele Tricoli ]
+  * New upstream version 4.3.0. (Closes: #955112)
+  * debian/control
+    - Bump Standards-Version to 4.5.0 (no changes needed).
+    - Set Rules-Requires-Root to no
+  * debian/copyright
+    - Update copyright years.
+    - Update Source upstream URL.
+  * debian/watch
+    - Update name of upstream source tarball.
+
+ -- Daniele Tricoli <eriol@debian.org>  Tue, 31 Mar 2020 04:30:56 +0200
+
+sphinxcontrib-spelling (4.2.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Use debhelper-compat instead of debian/compat.
+  * Bump Standards-Version to 4.4.0.
+  * d/control: Remove ancient X-Python3-Version field.
+  * Drop Python 2 support.
+
+ -- Ondřej Nový <onovy@debian.org>  Fri, 02 Aug 2019 08:59:03 +0200
+
+sphinxcontrib-spelling (4.2.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/tests: Use AUTOPKGTEST_TMP instead of ADTTMP
+  * d/control: Remove ancient X-Python-Version field
+  * Convert git repository from git-dpm to gbp layout
+  * Use 'python3 -m sphinx' instead of sphinx-build for building docs
+
+  [ Daniele Tricoli ]
+  * New upstream release.
+  * debian/control
+    - Update to use my debian.org mail address.
+    - Bump Standards-Version to 4.3.0 (no changes needed).
+  * debian/copyright
+    - Update to use my debian.org mail address.
+  * debian/upstream/signing-key.asc
+    - Fix public-upstream-key-not-minimal lintian tag.
+
+ -- Daniele Tricoli <eriol@debian.org>  Mon, 31 Dec 2018 02:08:06 +0100
+
+sphinxcontrib-spelling (4.0.1-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Set Vcs-* to salsa.debian.org
+
+  [ Daniele Tricoli ]
+  * New upstream release.
+  - debian/clean
+    - Add entry to clean docs/build/.
+  - debian/compat
+    - Bump compat level to 11.
+  * debian/control
+    - Add python{,3}-fixtures to Build-Depends.
+    - Bump X-Python3-Version to >= 3.5.
+    - Bump debhelper to >= 11 in Build-Depends.
+    - Update Homepage field.
+    - Bump Standards-Version to 4.1.3 (no changes needed).
+  * debian/copyright
+    - Use secure URI in Format field.
+    - Update copyright years.
+    - Use secure URI in Source field.
+  * debian/rules
+    - Use override_dh_sphinxdoc to build docs.
+    - Include /usr/share/dpkg/pkg-info.mk.
+    - Drop override_dh_auto_clean: debian/clean is used instead.
+  * debian/tests/control
+    - Add python{,3}-fixtures to Depends.
+
+ -- Daniele Tricoli <eriol@mornie.org>  Thu, 15 Feb 2018 01:59:43 +0100
+
+sphinxcontrib-spelling (2.3.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/{,tests/}control
+    - Add hunspell-de-de since it's needed by tests.
+
+ -- Daniele Tricoli <eriol@mornie.org>  Thu, 08 Dec 2016 23:55:04 +0100
+
+sphinxcontrib-spelling (2.2.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Fixed homepage (https)
+  * Fixed VCS URL (https)
+
+  [ Daniele Tricoli ]
+  * New upstream release.
+  * debian/control
+    - Bump Standards-Version to 3.9.8 (no changes needed).
+    - Remove XS-Testsuite: autopkgtest since from dpkg 1.17.11 the field is
+      automatically added by dpkg-source.
+
+ -- Daniele Tricoli <eriol@mornie.org>  Sun, 18 Sep 2016 20:36:14 +0200
+
+sphinxcontrib-spelling (2.1.2-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+  * debian/control
+    - Replace Build-Depends myspell-en-us with hunspell-en-us
+      (Closes: #803662)
+    - Bump Standards-Version to 3.9.5 (no changes needed)
+    - Add python-six and python3-six to Build-Depends. Thanks to Michael
+      Bienia who fixed this in 2.1.1-1ubuntu1.
+  * debian/watch
+    - Update to use pypi.debian.net
+
+ -- Stein Magnus Jodal <jodal@debian.org>  Wed, 04 Nov 2015 20:28:45 +0100
+
+sphinxcontrib-spelling (2.1.1-1) unstable; urgency=medium
+
+  * New upstream release
+    - Fix unicode handling in builtins filter (Closes: #720341)
+  * Switched to pybuild (Closes: #745382)
+  * Added Python3 package
+  * Added python-sphinxcontrib.spelling-doc package
+  * debian/compat
+    - Bumped debhelper compatibility level to 9
+  * debian/control
+    - Added dh-python and python-pbr to Build-Depends
+    - Bumped python-all to (>= 2.6.6-3)
+    - Bumped debhelper B-D to (>= 9)
+    - Bumped Standards-Version to 3.9.5 (no changes needed)
+    - Added stanza for python-sphinxcontrib.spelling.doc package
+    - Added stanza for python3-sphinxcontrib.spelling package
+    - Added python3-{all,docutils,enchant,nose,pbr,setuptools,sphinx} to B-D
+    - Added X-Python{,3}-Version option
+  * debian/copyright
+    - Updated copyright years
+  * debian/python-sphinxcontrib.spelling.docs
+    - Renamed from debian/docs
+  * debian/python-sphinxcontrib.spelling-doc.doc-base
+    - Added doc-base
+  * debian/python-sphinxcontrib.spelling-doc.docs
+    - Added
+  * debian/python{,3}-sphinxcontrib.spelling.pyremove
+    - Removed .pth since it is not needed
+  * debian/rules
+    - Built documentation using sphinx-build inside override_dh_auto_build
+    - Cleaned build documentation inside override_dh_auto_clean
+    - Switched to PYBUILD_TEST_NOSE=1 for tests
+    - Added python3 to debhelper rule
+  * debian/tests/control
+    - Added stanza for Python3 testing
+  * debian/tests/unittests{,3}
+    - Updated tests path due to upstream change
+    - Switched to -m nose instead of calling nosetests{2,3}
+  * debian/tests/unittests3
+    - Added
+  * debian/upstream/signing-key.asc
+    - Added upstream key
+  * debian/watch
+    - Switched download URL to HTTPS
+    - Added pgpsigurlmangle option
+
+ -- Daniele Tricoli <eriol@mornie.org>  Tue, 22 Jul 2014 23:55:48 +0200
+
+sphinxcontrib-spelling (1.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Added autopkgtests
+  * debian/control
+    - Fixed lintian vcs-field-not-canonical
+    - Updated Homepage field
+    - Bumped Standards-Version to 3.9.4
+      - Bumped debhelper dependency to 8.1 for build-{arch,indep} support
+  * debian/copyright
+    - Updated copyright years
+    - Updated Format URL to latest version
+    - Properly formatting License field: see #700970 for details
+  * debian/rules
+    - Removed work-around for #645125 since it's fixed
+
+ -- Daniele Tricoli <eriol@mornie.org>  Tue, 07 May 2013 22:45:05 +0200
+
+sphinxcontrib-spelling (1.3-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/clean
+    - Added to clean .egg-info directory
+  * debian/copyright
+    - Updated copyright years
+  * debian/rules
+    - Added work-around for #645125
+
+ -- Daniele Tricoli <eriol@mornie.org>  Tue, 31 Jan 2012 23:43:05 +0100
+
+sphinxcontrib-spelling (1.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #628649)
+
+ -- Daniele Tricoli <eriol@mornie.org>  Fri, 16 Sep 2011 15:14:14 +0200
