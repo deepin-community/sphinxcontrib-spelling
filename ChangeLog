@@ -1,6 +1,156 @@
 CHANGES
 =======
 
+7.7.0
+-----
+
+* update documentation for spelling:ignore role
+* Spelling fix
+* Updates to pass CI checks
+* Add history.rst notes
+* Lint fix
+* Add unit tests
+* Attempt to add spelling ignore role
+* update release notes
+* builder: quiet debug
+* Update setup.cfg to use description\_file
+
+7.6.2
+-----
+
+* github: update checkout action to v3
+* update history for 7.6.2 release
+* directive: quiet debug
+* linter: ignore print statements in test setup code
+* linter: add flake8-debug plugin to detect leftover print statements
+* mergify: apply ci label when changing github action configs
+* do not run tests when tags are pushed
+
+7.6.1
+-----
+
+* update history with version before 7.6.1 release
+* Fix spelling:word role rendering verbatim
+* update expected result in docstring test
+* add test job using isolated build setup
+* skip builder test that requires git history
+* add isolated test environment
+* move check for git repo to reusable module
+* add check-python-versions to pkglint job
+* fix broken links in release notes
+* set doc language to english for sphinx 5.0
+* docs: update docs for domain
+
+7.6.0
+-----
+
+* docs: update history for 7.6.0 release
+* feature: add spelling:word role for inline corrections
+* maintenance: refactor code for managing temporary word list
+* docs: update documentation to use new domain-based directive
+* feature: add domain
+* maintenance: clean up imports in sphinxcontrib.spelling
+
+7.5.1
+-----
+
+* docs: update history file for 7.5.1 release
+* filters: trap exits from imported modules
+* ci: have pytest capture log output at debug level
+
+7.5.0
+-----
+
+* builder: add tests for multiple wordlist filenames
+* Documetnation updated as per review
+* Fix speeling errors
+* Adding documentation
+* Fix history refernce
+* Add note to history
+* Split string into list iff contains commas
+* Support list of wordlists as a string
+* builder: check text of captions
+* ci: re-enable django integration job
+* ci: do not require django ci job
+* ci: include integration test scripts in linter job
+* feature: limit the suggestions shown in the output
+
+7.4.1
+-----
+
+* docs: release notes for 7.4.1
+* builder: add test for docstring fix
+* Updated history.rst
+* Avoid crashing on nodes missing line number information
+* mergify: set ci label when pr changes tox config
+* mergify: add rule to automatically add mergify label
+* ci: add mergify rule to automatically add 'ci' label to PRs
+* docs: add linkcheck to build
+
+7.4.0
+-----
+
+* docs: 7.4.0 release notes
+* builder: include the line offset in location saved to output file
+* Fixed linter problems
+* Renamed line\_offs to line\_offset
+* Updated history.rst
+* Updated test cases
+* Use the line of the misspelled word as source position in message
+* ci: add python 3.11 test job
+* builder: log our version of location instead of log library's
+* builder: report error locations using relative paths
+* tox: pass PYENCHANT\_LIBRARY\_PATH variable through to commands
+* tox: only run unit tests with one version of python by default
+* builder: show the correct filename for included files
+* handle empty word list
+
+7.3.3
+-----
+
+* Add PR #150 to history
+* Minor code tweaks
+* Add PR #149 to history
+* Skip contrib test when not in repo
+* Switch to PEP 420 namespace
+
+7.3.2
+-----
+
+* docs: fix history for pr 143
+* tox: quite pytest output
+* filters: fix python filename handling
+* filters: treat \_\_main\_\_ as special
+* mergify: do not require history updates for CI changes
+* history-update: do not run check if ref is a tag
+
+7.3.1
+-----
+
+* history-update: fix fetch-depth syntax
+* add history update for #137
+* debug
+* mergify: require history-update job to pass
+* actions: add CI job requiring PRs to include history updates
+* filters: do not use imp in ImportableModuleFilter
+* tox: remove default environments for interpreters I no longer use
+* add show-changelog.sh
+* docs: add details to 7.3.0 release history
+* docs: fix markup in history file
+* Add changelog entry for 7.3.0
+
+7.3.0
+-----
+
+* mergify: require python 3.10 tests
+* ci(Mergify): configuration update
+* Fix broken link to Doug's blog post @ customize
+* YAML
+* Test on Python 3.10
+* Improve ImportableModuleFilter
+* Correct setup.cfg
+* Spelling edit in README
+
 7.2.1
 -----
 

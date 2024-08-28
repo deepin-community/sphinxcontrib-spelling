@@ -1,7 +1,3 @@
-.. spelling::
-
-   wikis
-
 =======================
  Configuration Options
 =======================
@@ -27,12 +23,21 @@ Input Options
   String specifying a file containing a list of words known to be
   spelled correctly but that do not appear in the language dictionary
   selected by ``spelling_lang``.  The file should contain one word per
-  line. Refer to the `PyEnchant tutorial`_ for details. Use a list to add
-  multiple files.
+  line. Refer to the `PyEnchant tutorial`_ for details.
+
+  To add multiple files use a list, or a comma separated string. This
+  is useful when calling sphinx with ``-D
+  spelling_word_list_filename=...`` which will not accept a list and
+  will only accept a string parameter.
 
 ``spelling_word_list_filename=['spelling_wordlist.txt','another_list.txt']``
 
   Same as above, but with several files of correctly spelled words.
+
+``spelling_word_list_filename='spelling_wordlist.txt,another_list.txt'``
+
+  Same as above, but with several files of correctly spelled words, and
+  passing the setting as a single string. 
 
 ``spelling_exclude_patterns=['ignored_*']``
 
@@ -52,7 +57,13 @@ Output Options
 ``spelling_show_suggestions=False``
 
   Boolean controlling whether suggestions for misspelled words are
-  printed.  Defaults to False.
+  printed.  Defaults to ``False``.
+
+``spelling_suggestion_limit=0``
+
+  Integer number of suggestions to emit when
+  ``spelling_show_suggestions`` is ``True``. Defaults to ``0``,
+  meaning no limit. Any positive value truncates the suggestion limit.
 
 ``spelling_show_whole_line=True``
 
@@ -87,7 +98,7 @@ returned by the tokenizer to be checked.
 ``spelling_ignore_wiki_words=True``
 
   Boolean controlling whether words that follow the CamelCase
-  conventions used for page names in wikis should be treated as
+  conventions used for page names in :spelling:word:`wikis` should be treated as
   spelled properly. Defaults to ``True``.
 
 ``spelling_ignore_acronyms=True``
@@ -120,10 +131,10 @@ returned by the tokenizer to be checked.
   derived from ``enchant.tokenize.Filter``. Refer to the `PyEnchant
   tutorial`_ for examples.
 
-Private Dictionaries
-====================
+Managing Lists of Correctly Spelled Words and Ignoring Words
+============================================================
 
-There are two ways to provide a list of known good words. The
+There are three ways to provide a list of known good words. The
 ``spelling_word_list_filename`` option (described above) specifies the
 name of a plain text file containing one word per line. All of the
 words in the file are assumed to be spelled correctly and may appear
@@ -137,10 +148,10 @@ For example::
 
   spelling_word_list_filename = ['spelling_wordlist.txt', 'my_wordlist.txt']
 
-The ``spelling`` directive can be used to create a list of words known
-to be spelled correctly within a single file.  For example, if a
-document refers to a person or project by name, the name can be added
-to the list of known words for just that document.
+The ``spelling:word-list`` directive can be used to create a list of
+words known to be spelled correctly within a single file.  For
+example, if a document refers to a person or project by name, the name
+can be added to the list of known words for just that document.
 
 ::
 
@@ -149,6 +160,20 @@ to the list of known words for just that document.
      Docutils
      Goodger
 
+The ``spelling:word`` role can be used to annotate individual words as
+being spelled correctly throughout a single document.
+
+
+::
+
+  This text refers to :spelling:word:`Goodger`.
+
+The ``spelling:ignore`` role can be used to ignore a single instance
+of a word.
+
+::
+
+  This text refers to :spelling:ignore:`docutils`.
 
 .. _PyEnchant: https://github.com/rfk/pyenchant
 
@@ -166,7 +191,7 @@ this :class:`AcronymFilter` skips words that are all uppercase letters
 or all uppercase with a trailing lowercase "s".
 
 ::
-    
+
     class AcronymFilter(Filter):
         """If a word looks like an acronym (all upper case letters),
         ignore it.
@@ -197,5 +222,5 @@ files. The Sphinx project's ``conf.py`` then needs two changes.
 .. seealso::
 
    * `Creating a Spelling Checker for reStructuredText Documents
-     <http://doughellmann.com/2011/05/creating-a-spelling-checker-for-restructuredtext-documents.html>`_
+     <https://doughellmann.com/posts/creating-a-spelling-checker-for-restructuredtext-documents/>`_
    * `PyEnchant tutorial`_

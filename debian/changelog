@@ -1,3 +1,36 @@
+sphinxcontrib-spelling (7.7.0-1) unstable; urgency=medium
+
+  * New upstream version 7.7.0
+  * debian/control
+    - Bump Standards-Version to 4.6.2, no changes needed.
+  * debian/copyright
+    - Update copyright years.
+
+ -- Daniele Tricoli <eriol@debian.org>  Thu, 12 Jan 2023 00:16:51 +0100
+
+sphinxcontrib-spelling (7.6.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 7.6.2.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 29 Oct 2022 19:48:06 +0300
+
+sphinxcontrib-spelling (7.5.1-1) unstable; urgency=medium
+
+  * New upstream version 7.5.1
+  * debian/control
+    - Bump Standards-Version to 4.6.1, no changes needed.
+
+ -- Daniele Tricoli <eriol@debian.org>  Thu, 23 Jun 2022 20:50:26 +0200
+
+sphinxcontrib-spelling (7.3.2-1) unstable; urgency=medium
+
+  * New upstream version 7.3.2
+  * debian/copyright
+    - Update copyright years.
+
+ -- Daniele Tricoli <eriol@debian.org>  Wed, 13 Apr 2022 01:42:45 +0200
+
 sphinxcontrib-spelling (7.2.1-1) unstable; urgency=medium
 
   [ Ondřej Nový ]

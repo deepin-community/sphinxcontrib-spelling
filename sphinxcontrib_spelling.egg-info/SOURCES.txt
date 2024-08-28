@@ -1,3 +1,4 @@
+.mergify.yml
 .readthedocs.yml
 .testr.conf
 AUTHORS
@@ -9,8 +10,10 @@ README
 requirements.txt
 setup.cfg
 setup.py
+show-changelog.sh
 tox.ini
 .github/workflows/check.yml
+.github/workflows/history-update.yaml
 .github/workflows/integration.yaml
 .github/workflows/python-publish.yaml
 .github/workflows/test.yml
@@ -25,13 +28,14 @@ docs/source/install.rst
 docs/source/run.rst
 docs/source/spelling_wordlist.txt
 integration_tests/build_django.py
-sphinxcontrib/__init__.py
 sphinxcontrib/spelling/__init__.py
 sphinxcontrib/spelling/asset.py
 sphinxcontrib/spelling/builder.py
 sphinxcontrib/spelling/checker.py
 sphinxcontrib/spelling/directive.py
+sphinxcontrib/spelling/domain.py
 sphinxcontrib/spelling/filters.py
+sphinxcontrib/spelling/role.py
 sphinxcontrib_spelling.egg-info/PKG-INFO
 sphinxcontrib_spelling.egg-info/SOURCES.txt
 sphinxcontrib_spelling.egg-info/dependency_links.txt
@@ -42,7 +46,9 @@ sphinxcontrib_spelling.egg-info/pbr.json
 sphinxcontrib_spelling.egg-info/requires.txt
 sphinxcontrib_spelling.egg-info/top_level.txt
 tests/__init__.py
+tests/helpers.py
 tests/test_builder.py
 tests/test_checker.py
 tests/test_filter.py
 tests/test_wordlist.txt
+tools/history-update.sh

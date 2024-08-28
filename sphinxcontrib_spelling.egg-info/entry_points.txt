@@ -1,3 +1,2 @@
 [sphinx.builders]
 spelling = sphinxcontrib.spelling
-
