@@ -16,7 +16,7 @@ Build-Depends:
  python3-pytest,
  python3-setuptools,
  python3-sphinx
-Standards-Version: 4.6.0
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Homepage: https://github.com/sphinx-contrib/spelling
 Vcs-Git: https://salsa.debian.org/python-team/packages/sphinxcontrib-spelling.git

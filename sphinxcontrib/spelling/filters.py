@@ -7,8 +7,9 @@
 # TODO - Words with multiple uppercase letters treated as classes and ignored
 
 import builtins
-import imp
+import importlib
 import subprocess
+import sys
 from xmlrpc import client as xmlrpc_client
 
 from enchant.tokenize import Filter, get_tokenizer, tokenize, unit_tokenize
@@ -177,18 +178,48 @@ class ImportableModuleFilter(Filter):
     """
     def __init__(self, tokenizer):
         super().__init__(tokenizer)
-        self.found_modules = set()
-        self.sought_modules = set()
+        self.found_modules = set(sys.builtin_module_names)
+        self.sought_modules = self.found_modules.copy()
+        # By adding __main__ to the list of sought modules but not
+        # found modules we ensure that it is never recognized as a
+        # valid module, which is consistent with the behavior before
+        # version 7.3.1.  See
+        # https://github.com/sphinx-contrib/spelling/issues/141
+        self.sought_modules.add('__main__')
 
     def _skip(self, word):
+        # If the word looks like a python module filename, strip the
+        # extension to avoid the side-effect of actually importing the
+        # module. This prevents, for example, 'setup.py' triggering an
+        # import of the setup module during a doc build, which makes
+        # it look like Sphinx is complaining about a commandline
+        # argument. See
+        # https://github.com/sphinx-contrib/spelling/issues/142
+        if word.endswith('.py'):
+            logger.debug(
+                'removing .py extension from %r before searching for module',
+                word)
+            word = word[:-3]
+
+        valid_module_name = all(n.isidentifier() for n in word.split('.'))
+        if not valid_module_name:
+            return False
+
         if word not in self.sought_modules:
             self.sought_modules.add(word)
             try:
-                imp.find_module(word)
-            except ImportError:
-                return False
-            self.found_modules.add(word)
-            return True
+                mod = importlib.util.find_spec(word)
+            except BaseException as err:
+                # This could be an ImportError, SystemExit, some more detailed
+                # error out of distutils, or something else triggered
+                # by failing to be able to import a parent package to
+                # use the metadata to search for a subpackage.
+                logger.debug('find_spec(%r) failed, invalid module name: %s',
+                             word, err)
+            else:
+                if mod is not None:
+                    self.found_modules.add(word)
+
         return word in self.found_modules
 
 
@@ -209,15 +240,14 @@ class ContributorFilter(IgnoreWordsFilter):
 
     def _get_contributors(self):
         logger.info('Scanning contributors')
-        cmd = [
-            'git', 'log', '--quiet', '--no-color',
-            '--pretty=format:' + self._pretty_format,
-        ]
+        cmd = ['git', 'log', '--quiet', '--no-color',
+               f'--pretty=format:{self._pretty_format}']
+
         try:
             p = subprocess.run(cmd, check=True, stdout=subprocess.PIPE)
         except subprocess.CalledProcessError as err:
-            logger.warning('Called: {}'.format(' '.join(cmd)))
-            logger.warning(f'Failed to scan contributors: {err}')
+            logger.warning('Called: %s', ' '.join(cmd))
+            logger.warning('Failed to scan contributors: %s', err)
             return set()
         output = p.stdout.decode('utf-8')
         tokenizer = get_tokenizer('en_US', filters=[])

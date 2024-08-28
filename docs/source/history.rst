@@ -2,9 +2,178 @@
  Release History
 =================
 
-.. spelling::
+.. spelling:word-list::
 
+   Homebrew
+   libenchant
+   macOS
    unmaintained
+
+7.7.0
+=====
+
+New Features
+------------
+
+- `#199 <https://github.com/sphinx-contrib/spelling/pull/199>`__ Add
+  ``spelling:ignore`` role for marking inline text to not be
+  checked. See :doc:`/customize` for more details.
+
+7.6.2
+=====
+
+Bug Fixes
+---------
+
+- `#193 <https://github.com/sphinx-contrib/spelling/issues/193>`__
+  Remove excessive debug printing in `:spelling:word:` and `spelling` builder
+  implementations.
+
+7.6.1
+=====
+
+Bug Fixes
+---------
+
+- `#188 <https://github.com/sphinx-contrib/spelling/issues/188>`__
+  Fix `:spelling:word:` directives from being printed verbatim in
+  output files.
+
+7.6.0
+=====
+
+Features
+--------
+
+- Convert to use Sphinx domains. Add ``spelling:word-list``
+  directive. Have ``spelling`` directive report that it is deprecated.
+- Add ``spelling:word`` role for marking inline text as spelled
+  correctly.
+
+7.5.1
+=====
+
+Bug Fixes
+---------
+
+- `#180 <https://github.com/sphinx-contrib/spelling/issues/180>`__
+  Suppress `SystemExit` errors in `ImportableModuleFilter` caused by
+  importing modules that run code on import and exit when that code
+  sees an error. Bug report and reproducer provided by Trevor Gross.
+
+7.5.0
+=====
+
+Features
+--------
+
+- `#151 <https://github.com/sphinx-contrib/spelling/issues/151>`__
+  Added configuration option to limit the number of suggestions
+  output. See :doc:`/customize` for more details. Idea contributed by
+  Trevor Gross.
+- `#169 <https://github.com/sphinx-contrib/spelling/issues/169>`__
+  Adds the ability to pass in multiple wordlists via the sphinx
+  command line as ``-D spelling_word_list_filename=file1,file2``.
+
+Bug Fixes
+---------
+
+- `#36 <https://github.com/sphinx-contrib/spelling/issues/36>`__
+  Include captions of figures in the set of nodes for which the text
+  is checked.
+
+7.4.1
+=====
+
+- `#160 <https://github.com/sphinx-contrib/spelling/issues/160>`__
+  Fixed issue with the builder crashing when reporting a misspelled word
+  in a python docstring.
+
+7.4.0
+=====
+
+- Fix a problem that occurred when the extra word list is empty and an
+  IndexError is thrown. Prevent the error by checking the contents of
+  the file before using the list.
+- `#153 <https://github.com/sphinx-contrib/spelling/issues/153>`__
+  Ensure the correct relative filename is reported as the location of
+  a misspelled word when the word is in an included file. Log the
+  location ourselves instead of letting the logging system compute it
+  for consistency until `the fix
+  <https://github.com/sphinx-doc/sphinx/pull/10460>`__ is merged into
+  Sphinx.
+- Change default env list for local tox runs to only include the
+  current python version, as defined by the installation of tox.
+- Tell tox to pass `PYENCHANT_LIBRARY_PATH` through to commands. On
+  macOS it can be a little tricky to set up libenchant if your default
+  python does not match the one used by Homebrew for the
+  library. Setting the variable to point to the library fixes that,
+  but we don't want to set it in this file for everyone so use
+  `passenv` to tell tox to pass the setting through when running the
+  commands for each env.
+- `#159 <https://github.com/sphinx-contrib/spelling/issues/159>`__
+  Report using the line number of the misspelled word instead of using
+  the first line of the node, in both the log and `.spelling` output
+  file.
+
+7.3.3
+=====
+
+Bug Fixes
+---------
+
+- `#149 <https://github.com/sphinx-contrib/spelling/pull/149>`__ Fixes
+  to support testing when building RPMs. Switch to PEP 420 native
+  namespace and skip contributors test when not in a git repo.
+- `#150 <https://github.com/sphinx-contrib/spelling/pull/150>`__ Minor
+  code cleanup primarily around string interpolation.
+
+7.3.2
+=====
+
+Bug Fixes
+---------
+
+- `#143 <https://github.com/sphinx-contrib/spelling/pull/143>`__ Treat
+  ``__main__`` as a special module name that cannot be imported. If
+  the test suite is invoked by running ``python -m pytest`` instead of
+  ``pytest`` then there will be no ``__main__`` and find_spec() will
+  fail, so this change makes the tests work in both modes.
+- `#144 <https://github.com/sphinx-contrib/spelling/pull/144>`__ Fix
+  python filename handling in ``ImportableModuleFilter``.  If the word
+  looks like a python module filename, strip the extension to avoid
+  the side-effect of actually importing the module. This prevents, for
+  example, ``'setup.py'`` triggering an import of the ``setup`` module
+  during a doc build, which makes it look like Sphinx is complaining
+  about a commandline argument.
+
+7.3.1
+=====
+
+Bug Fixes
+---------
+
+- `#137 <https://github.com/sphinx-contrib/spelling/pull/137>`__
+  replace the use of deprecated ``imp`` in ``ImportableModuleFilter``
+  with ``importlib``
+
+7.3.0
+=====
+
+New Features
+------------
+
+- `#131 <https://github.com/sphinx-contrib/spelling/pull/131>`__
+  included a documentation update to fix a broken link.
+
+- `#130 <https://github.com/sphinx-contrib/spelling/pull/130>`__ tested support
+  for Python 3.10, and added the trove classifier.
+
+- `#129 <https://github.com/sphinx-contrib/spelling/pull/129>`__ improved the
+  speed of the ``ImportableModuleFilter``.
+
+- `#128 <https://github.com/sphinx-contrib/spelling/pull/128>`__ fixed
+  some issues with the packaging configuration.
 
 7.2.0
 =====
@@ -39,17 +208,15 @@ Bug Fixes
 
 - `#105 <https://github.com/sphinx-contrib/spelling/pull/105>`__
   reverts a change that switched from `imp` to `importlib`. Using
-  `importlib.find_spec()
-  <https://docs.python.org/3/library/importlib.html#importlib.util.find_spec>`__
+  `importlib.find_spec()`
   is not safe at runtime as it can import modules which will cause
   side effects within environments.
 
 7.0.0
 =====
 
-This major release drops support for Python 3.5. This version `is not
-maintained anymore
-<https://devguide.python.org/devcycle/#end-of-life-branches>`__.
+This major release drops support for Python 3.5. This version is not
+maintained anymore.
 
 Bug Fixes
 ---------
